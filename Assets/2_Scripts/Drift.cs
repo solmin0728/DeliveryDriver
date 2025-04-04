@@ -12,9 +12,12 @@ public class Drift : MonoBehaviour
 
     Rigidbody2D rb;
 
+    AudioSource audioSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = rb.GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -42,13 +45,15 @@ public class Drift : MonoBehaviour
         bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 1f;
         if (isDrifting)
         {
-            if(!smokeLeft.isPlaying) smokeLeft.Play();
-            if(!smokeRight.isPlaying) smokeRight.Play();
+            if (!audioSource.isPlaying) audioSource.Play();
+            if (!smokeLeft.isPlaying) smokeLeft.Play();
+            if (!smokeRight.isPlaying) smokeRight.Play();
         }
         else
         {
-            if (!smokeLeft.isPlaying) smokeLeft.Stop();
-            if (!smokeRight.isPlaying) smokeRight.Stop();
+            if (audioSource.isPlaying) audioSource.Stop();
+            if (smokeLeft.isPlaying) smokeLeft.Stop();
+            if (smokeRight.isPlaying) smokeRight.Stop();
         }
     }
 }

@@ -10,14 +10,28 @@ public class Drift : MonoBehaviour
     [SerializeField] ParticleSystem smokeLeft;
     [SerializeField] ParticleSystem smokeRight;
 
+    [SerializeField] TrailRenderer leftTrail;
+    [SerializeField] TrailRenderer rightTrail;
+
+    [SerializeField] float slowAcclerationRatio = 0.5f;
+    [SerializeField] float boostAcclerationRatio = 1.5f;
+
     Rigidbody2D rb;
 
     AudioSource audioSource;
+
+    float defaultAccleration;
+    float slowAccleration;
+    float boostAccleration;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = rb.GetComponent<AudioSource>();
+
+        defaultAccleration = accleration;
+        slowAccleration = accleration * slowAcclerationRatio;
+        boostAccleration = accleration * boostAcclerationRatio;
     }
 
     void FixedUpdate()
@@ -42,7 +56,7 @@ public class Drift : MonoBehaviour
     private void Update()
     {
         float sidewayVelocity = Vector2.Dot(rb.linearVelocity, transform.right);
-        bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 1f;
+        bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 2.2f;
         if (isDrifting)
         {
             if (!audioSource.isPlaying) audioSource.Play();
@@ -55,5 +69,34 @@ public class Drift : MonoBehaviour
             if (smokeLeft.isPlaying) smokeLeft.Stop();
             if (smokeRight.isPlaying) smokeRight.Stop();
         }
+
+        leftTrail.emitting = isDrifting;
+        rightTrail.emitting = isDrifting;
+    }
+
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Boost"))
+        {
+            accleration = boostAccleration;
+            Debug.Log("Boost!");
+
+            Invoke(nameof(ResetAccleration), 5f);
+            //Destroy(other.gameObject, destoryDelay);
+        }
+    }
+
+    void ResetAccleration()
+    {
+        accleration = defaultAccleration;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        accleration = slowAccleration;
+        Debug.Log("¾Æ¾ß!");
+
     }
 }

@@ -33,7 +33,6 @@ public class Driver : MonoBehaviour
     {
         moveSpeed = slowSpeed;
         Debug.Log("¾Æ¾ß!");
-
     }
 
     void Update()

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Delivery : MonoBehaviour
 {
-    [SerializeField] float destoryDelay = 0.3f;
+    [SerializeField] float destoryDelay = 0.2f;
     [SerializeField] Color noChickenColor = new Color(1, 1, 1, 1);
     [SerializeField] Color hasChickenColor = new Color(0.35f, 0.65f, 1, 1);
     bool hasChicken = false;

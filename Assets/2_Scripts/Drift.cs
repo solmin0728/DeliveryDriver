@@ -81,7 +81,7 @@ public class Drift : MonoBehaviour
         if (other.gameObject.CompareTag("Boost"))
         {
             accleration = boostAccleration;
-            Debug.Log("Boost!");
+            Debug.Log("속도가 증가합니다");
 
             Invoke(nameof(ResetAccleration), 5f);
             //Destroy(other.gameObject, destoryDelay);
@@ -96,7 +96,8 @@ public class Drift : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         accleration = slowAccleration;
-        Debug.Log("아야!");
+        Debug.Log("가드레일과 충돌했습니다!");
+        Debug.Log("속도가 감소합니다");
 
     }
 }

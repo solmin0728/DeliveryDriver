@@ -17,7 +17,7 @@ public class Delivery : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Chicken") && !hasChicken)
         {
-            Debug.Log("치킨 픽업");
+            Debug.Log("치킨을 픽업했습니다");
             hasChicken = true;
             Destroy(collision.gameObject, destoryDelay);
             spriteRenderer.color = hasChickenColor;
@@ -25,9 +25,14 @@ public class Delivery : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Customer") && hasChicken)
         {
-            Debug.Log("배달 완료");
+            Debug.Log("배달을 완료했습니다");
+            Debug.Log("손님: 감사합니다!");
             hasChicken = false;
+            Destroy(collision.gameObject, destoryDelay);
             spriteRenderer.color = noChickenColor;
+
+            FindFirstObjectByType<CustomerSpawner>().currentCustomer = null;
+            FindFirstObjectByType<CustomerSpawner>().SpawnCustomer();
         }
 
     }

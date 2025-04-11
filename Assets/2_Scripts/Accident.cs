@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarCollision : MonoBehaviour
+public class Accident : MonoBehaviour
 {
     public AudioClip crashSound;
     private AudioSource audioSource;

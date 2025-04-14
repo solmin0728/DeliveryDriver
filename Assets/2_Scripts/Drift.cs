@@ -16,9 +16,11 @@ public class Drift : MonoBehaviour
     [SerializeField] float slowAcclerationRatio = 0.5f;
     [SerializeField] float boostAcclerationRatio = 1.5f;
 
+    [SerializeField] float destroyDelay = 1f;
+
     Rigidbody2D rb;
 
-    AudioSource audioSource;
+    [SerializeField] AudioSource driftAudioSource;
 
     float defaultAccleration;
     float slowAccleration;
@@ -27,7 +29,6 @@ public class Drift : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        audioSource = rb.GetComponent<AudioSource>();
 
         defaultAccleration = accleration;
         slowAccleration = accleration * slowAcclerationRatio;
@@ -59,13 +60,13 @@ public class Drift : MonoBehaviour
         bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 2.2f;
         if (isDrifting)
         {
-            if (!audioSource.isPlaying) audioSource.Play();
+            if (!driftAudioSource.isPlaying) driftAudioSource.Play();
             if (!smokeLeft.isPlaying) smokeLeft.Play();
             if (!smokeRight.isPlaying) smokeRight.Play();
         }
         else
         {
-            if (audioSource.isPlaying) audioSource.Stop();
+            if (driftAudioSource.isPlaying) driftAudioSource.Stop();
             if (smokeLeft.isPlaying) smokeLeft.Stop();
             if (smokeRight.isPlaying) smokeRight.Stop();
         }
@@ -84,20 +85,21 @@ public class Drift : MonoBehaviour
             Debug.Log("속도가 증가합니다");
 
             Invoke(nameof(ResetAccleration), 5f);
-            //Destroy(other.gameObject, destoryDelay);
+            Destroy(other.gameObject, destroyDelay);
         }
     }
 
     void ResetAccleration()
     {
         accleration = defaultAccleration;
+        Debug.Log("속도가 원래대로 돌아왔습니다");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         accleration = slowAccleration;
-        Debug.Log("가드레일과 충돌했습니다!");
-        Debug.Log("속도가 감소합니다");
+        Debug.LogWarning("가드레일과 충돌했습니다! 속도가 5초동안 감소합니다");
 
+        Invoke(nameof(ResetAccleration), 5f);
     }
 }

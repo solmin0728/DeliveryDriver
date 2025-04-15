@@ -57,7 +57,7 @@ public class Drift : MonoBehaviour
     private void Update()
     {
         float sidewayVelocity = Vector2.Dot(rb.linearVelocity, transform.right);
-        bool isDrifting = rb.linearVelocity.magnitude > 2f && Mathf.Abs(sidewayVelocity) > 2.2f;
+        bool isDrifting = rb.linearVelocity.magnitude > 1f && Mathf.Abs(sidewayVelocity) > 2f;
         if (isDrifting)
         {
             if (!driftAudioSource.isPlaying) driftAudioSource.Play();

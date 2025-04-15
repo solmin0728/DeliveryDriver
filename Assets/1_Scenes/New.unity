@@ -13694,7 +13694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f4e20a1e2a370419935a8c1e0b72f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accleration: 28
+  accleration: 30
   steering: 2.5
   maxSpeed: 15
   driftFactor: 0.95
@@ -22800,6 +22800,9 @@ Transform:
   - {fileID: 1948116629}
   - {fileID: 875680911}
   - {fileID: 1622013328}
+  - {fileID: 307472277}
+  - {fileID: 573158342}
+  - {fileID: 2050670532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &805288710

@@ -70,7 +70,7 @@ public class CarHealth : MonoBehaviour
     {
         if (gameStatusText != null)
             gameStatusText.text = "Game Over";
-        gameStatusText.color = Color.red; // 빨간색으로 변경
+        gameStatusText.color = Color.red;
 
         restartButton.SetActive(true); // 버튼 보이게 하기
         Time.timeScale = 0f; // 게임 정지
@@ -79,7 +79,7 @@ public class CarHealth : MonoBehaviour
     public void MakeDelivery()
     {
         deliveriesMade++;
-        if (deliveriesMade >= 6)
+        if (deliveriesMade >= 4)
         {
             GameClear();
         }
@@ -89,7 +89,7 @@ public class CarHealth : MonoBehaviour
     {
         if (gameStatusText != null)
             gameStatusText.text = "Game Clear!";
-        gameStatusText.color = Color.yellow; // 노란색으로 변경
+        gameStatusText.color = Color.yellow;
 
         restartButton.SetActive(true); // 버튼 보이게 하기
         Time.timeScale = 0f; // 게임 정지

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Drift : MonoBehaviour
 {
-    [SerializeField] float accleration = 20f;     //전진/후진 가속도
+    [SerializeField] float accleration = 25f;     //전진/후진 가속도
     [SerializeField] float steering = 3f;         //조향 속도
     [SerializeField] float maxSpeed = 10f;        //최대 속도 제한
     [SerializeField] float driftFactor = 0.95f;   //낮을수록 더 미끄러짐
@@ -57,7 +57,7 @@ public class Drift : MonoBehaviour
     private void Update()
     {
         float sidewayVelocity = Vector2.Dot(rb.linearVelocity, transform.right);
-        bool isDrifting = rb.linearVelocity.magnitude > 1f && Mathf.Abs(sidewayVelocity) > 2f;
+        bool isDrifting = rb.linearVelocity.magnitude > 1.5f && Mathf.Abs(sidewayVelocity) > 1.5f;
         if (isDrifting)
         {
             if (!driftAudioSource.isPlaying) driftAudioSource.Play();

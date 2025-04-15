@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Accident : MonoBehaviour
 {
-    public AudioClip crashSound;
+    /*public AudioClip crashSound;
     private AudioSource AccidentAudioSource;
 
     void Start()
@@ -21,5 +21,5 @@ public class Accident : MonoBehaviour
                 AccidentAudioSource.PlayOneShot(crashSound);
             }
         }
-    }
+    }*/
 }
